@@ -117,9 +117,4 @@ Contribuições são bem-vindas! Sinta-se à vontade para enviar um pull request
 ## Licença
 
 Este projeto é licenciado sob a MIT License.
-
-
-
-
-
-
+```
