@@ -19,6 +19,6 @@ class PersonServiceImpl(private val personRepository: PersonRepository) : Person
     }
 
     override fun deleteById(id: UUID) {
-        personRepository.deleteById(id) ?: throw PersonNotFoundException(id)
+        personRepository.deleteById(id)
     }
 }
