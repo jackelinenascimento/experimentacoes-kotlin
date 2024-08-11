@@ -10,8 +10,9 @@ class InMemoryPersonRepository : PersonRepository {
 
     private val persons: MutableMap<UUID, Person> = mutableMapOf()
 
-    override fun save(person: Person) {
+    override fun save(person: Person): Person {
         persons[person.id] = person
+        return person
     }
 
     override fun findById(id: UUID): Person? {

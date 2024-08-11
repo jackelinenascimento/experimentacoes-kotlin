@@ -2,22 +2,23 @@ package org.example.domain.service
 
 import org.example.domain.model.Person
 import org.example.domain.repository.PersonRepository
+import org.example.exception.PersonNotFoundException
 import java.util.UUID
 
-class PersonServiceImpl(private val personRepository: PersonRepository) {
-    fun save(person: Person) {
-        personRepository.save(person)
+class PersonServiceImpl(private val personRepository: PersonRepository) : PersonService {
+    override fun save(person: Person): Person {
+        return this.personRepository.save(person)
     }
 
-    fun findById(id: UUID): Person? {
-        return personRepository.findById(id)
+    override fun findById(id: UUID): Person {
+        return personRepository.findById(id) ?: throw PersonNotFoundException(id)
     }
 
-    fun findAll(): List<Person> {
+    override fun findAll(): List<Person> {
         return personRepository.findAll()
     }
 
-    fun deleteById(id: UUID) {
-        personRepository.deleteById(id)
+    override fun deleteById(id: UUID) {
+        personRepository.deleteById(id) ?: throw PersonNotFoundException(id)
     }
 }
