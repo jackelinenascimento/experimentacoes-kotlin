@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     kotlin("jvm") version "1.9.10"
@@ -41,10 +40,14 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-tasks.withType<BootJar> {
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
+springBoot {
     mainClass.set("org.example.Application")
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
+tasks.named<org.springframework.boot.gradle.tasks.run.BootRun>("bootRun") {
+    mainClass.set("org.example.Application")
 }

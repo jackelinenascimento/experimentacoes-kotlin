@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.util.*
+import java.util.UUID
 
 @RestController
 @RequestMapping("/persons")
@@ -27,7 +27,7 @@ class PersonController(private val personService: PersonService) {
     @GetMapping
     fun getAllPersons(): ResponseEntity<List<Person>> {
         val persons = personService.findAll()
-        if(persons.isEmpty()) {
+        if (persons.isEmpty()) {
             throw EntityNotFoundException("No persons found")
         }
         return ResponseEntity(persons, HttpStatus.OK)
