@@ -1,7 +1,6 @@
 package org.example.domain.service
 
 import org.example.domain.model.Person
-import org.springframework.stereotype.Service
 import java.util.UUID
 
 interface PersonService {
