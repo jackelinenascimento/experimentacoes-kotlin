@@ -6,6 +6,7 @@ plugins {
     id("org.springframework.boot") version "3.1.2"
     id("io.spring.dependency-management") version "1.1.0"
     id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
+    id("org.flywaydb.flyway") version "9.16.0"
 }
 
 group = "com.example"
@@ -34,6 +35,14 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.postgresql:postgresql")
+
+    implementation("org.flywaydb:flyway-core")
+}
+
+flyway {
+    url = "jdbc:postgresql://localhost:5432/experimentacoes_kotlin"
+    user = "user"
+    password = "password"
 }
 
 ktlint {
@@ -63,4 +72,8 @@ springBoot {
 
 tasks.named<org.springframework.boot.gradle.tasks.run.BootRun>("bootRun") {
     mainClass.set("org.example.ApplicationKt")
+}
+
+tasks.named("build") {
+    dependsOn("flywayMigrate")
 }
