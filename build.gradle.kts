@@ -29,6 +29,11 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-ui:$springDocVersion")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
+
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.postgresql:postgresql")
 }
 
 ktlint {
@@ -53,9 +58,9 @@ tasks.withType<Test> {
 }
 
 springBoot {
-    mainClass.set("org.example.Application")
+    mainClass.set("org.example.ApplicationKt")
 }
 
 tasks.named<org.springframework.boot.gradle.tasks.run.BootRun>("bootRun") {
-    mainClass.set("org.example.Application")
+    mainClass.set("org.example.ApplicationKt")
 }

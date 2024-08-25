@@ -1,9 +1,9 @@
-package org.example.domain.repository
+package org.example.domain.port
 
 import org.example.domain.model.Person
 import java.util.UUID
 
-interface PersonRepository {
+interface PersonRepositoryPort {
     fun save(person: Person): Person
     fun findById(id: UUID): Person?
     fun findAll(): List<Person>

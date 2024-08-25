@@ -1,5 +1,6 @@
-package org.example.adapter.api
+package org.example.adapter.rest
 
+import org.example.adapter.repository.entity.PersonEntity
 import org.example.domain.model.Person
 import org.example.domain.service.PersonService
 import org.example.exception.EntityNotFoundException
@@ -19,8 +20,8 @@ import java.util.UUID
 class PersonController(private val personService: PersonService) {
 
     @PostMapping
-    fun savePerson(@RequestBody person: Person): ResponseEntity<Person> {
-        val savedPerson = personService.save(person)
+    fun savePerson(@RequestBody personEntity: PersonEntity): ResponseEntity<Person> {
+        val savedPerson = personService.save(personEntity.toDomain())
         return ResponseEntity(savedPerson, HttpStatus.CREATED)
     }
 
