@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 import java.util.UUID
 
 @Component
-class PersonRepositoryImpl(private val personJpaRepository: PersonJpaRepository): PersonRepository {
+class PersonRepositoryImpl(private val personJpaRepository: PersonJpaRepository) : PersonRepository {
     override fun save(person: Person): Person {
         val personEntity = PersonEntity.fromDomain(person)
         return personJpaRepository.save(personEntity).toDomain()

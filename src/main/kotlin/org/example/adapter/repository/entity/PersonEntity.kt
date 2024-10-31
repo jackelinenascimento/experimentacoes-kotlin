@@ -15,10 +15,10 @@ data class PersonEntity(
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     val id: UUID = UUID.randomUUID(),
 
-    @field:NotBlank(message = "Name is mandatory")
+    @NotBlank(message = "Name is mandatory")
     val name: String,
 
-    @field:Positive(message = "Age must be positive")
+    @Positive(message = "Age must be positive")
     val age: Int,
 
     val creationDate: LocalDateTime = LocalDateTime.now()

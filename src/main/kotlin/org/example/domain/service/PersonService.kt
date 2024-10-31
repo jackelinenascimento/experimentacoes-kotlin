@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 import java.util.UUID
 
 @Service
-class PersonService(private val personRepository: PersonRepository): PersonInputPort {
+class PersonService(private val personRepository: PersonRepository) : PersonInputPort {
 
     override fun savePerson(person: Person): Person {
         return personRepository.save(person)

@@ -7,7 +7,7 @@ import java.util.Optional
 import java.util.UUID
 
 @Repository
-interface PersonJpaRepository: JpaRepository<PersonEntity, UUID> {
+interface PersonJpaRepository : JpaRepository<PersonEntity, UUID> {
     override fun findById(id: UUID): Optional<PersonEntity>
     override fun deleteById(id: UUID)
     override fun findAll(): List<PersonEntity>

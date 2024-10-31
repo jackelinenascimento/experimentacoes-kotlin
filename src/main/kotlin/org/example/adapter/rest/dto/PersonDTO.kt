@@ -6,8 +6,11 @@ import org.example.domain.model.Person
 import java.util.UUID
 
 data class PersonRequestDTO(
-    @field:NotBlank(message = "Name is required")val name: String,
-    @field:Positive(message = "Age must be positve") val age: Int
+    @NotBlank(message = "Name is required")
+    val name: String,
+
+    @Positive(message = "Age must be positve")
+    val age: Int
 ) {
     fun toDomain() = Person(name = name, age = age)
 }

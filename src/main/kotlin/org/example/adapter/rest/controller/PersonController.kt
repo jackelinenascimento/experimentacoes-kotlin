@@ -22,7 +22,10 @@ import java.util.UUID
 class PersonController(private val personInputPort: PersonInputPort) {
 
     @PostMapping
-    fun savePerson(@RequestBody @Valid personRequestDTO: PersonRequestDTO): ResponseEntity<PersonResponseDTO> {
+    fun savePerson(
+        @Valid @RequestBody
+        personRequestDTO: PersonRequestDTO
+    ): ResponseEntity<PersonResponseDTO> {
         val person = personRequestDTO.toDomain()
         val savedPerson = personInputPort.savePerson(person)
         return ResponseEntity(PersonResponseDTO.fromDomain(savedPerson), HttpStatus.CREATED)
@@ -39,7 +42,7 @@ class PersonController(private val personInputPort: PersonInputPort) {
 
     @GetMapping("/{id}")
     fun getPersonById(@PathVariable id: UUID): ResponseEntity<Person> {
-        val person = personInputPort.getPersonById(id)
+        val person = personInputPort.getPersonById(id) ?: throw EntityNotFoundException("Person with id $id not found")
         return ResponseEntity(person, HttpStatus.OK)
     }
 
