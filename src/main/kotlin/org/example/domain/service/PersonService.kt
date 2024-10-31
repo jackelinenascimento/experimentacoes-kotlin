@@ -11,7 +11,7 @@ import java.util.UUID
 class PersonService(private val personRepository: PersonRepository) : PersonInputPort {
 
     override fun savePerson(person: Person): Person {
-        if(person.age < 0) {
+        if (person.age < 0) {
             throw IllegalArgumentException("Age must be positive")
         }
         return personRepository.save(person)

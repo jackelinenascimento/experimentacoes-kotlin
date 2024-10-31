@@ -22,7 +22,10 @@ import java.util.UUID
 class PersonController(private val personInputPort: PersonInputPort) {
 
     @PostMapping
-    fun savePerson(@Valid @RequestBody personRequestDTO: PersonRequestDTO): ResponseEntity<PersonResponseDTO> {
+    fun savePerson(
+        @Valid @RequestBody
+        personRequestDTO: PersonRequestDTO
+    ): ResponseEntity<PersonResponseDTO> {
         val person = personRequestDTO.toDomain()
         val savedPerson = personInputPort.savePerson(person)
         return ResponseEntity(PersonResponseDTO.fromDomain(savedPerson), HttpStatus.CREATED)

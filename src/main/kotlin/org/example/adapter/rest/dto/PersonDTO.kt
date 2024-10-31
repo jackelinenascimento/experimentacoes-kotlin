@@ -23,10 +23,10 @@ data class PersonResponseDTO(
 ) {
     companion object {
         fun fromDomain(person: Person) = PersonResponseDTO(
-            person.id ?: UUID.randomUUID(),
+            person.id,
             person.name,
             person.age,
-            person.creationDate ?: ""
+            person.creationDate
         )
     }
 }
