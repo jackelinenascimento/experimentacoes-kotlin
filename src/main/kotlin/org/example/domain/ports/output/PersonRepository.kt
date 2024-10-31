@@ -1,11 +1,12 @@
-package org.example.domain.port
+package org.example.domain.ports.output
 
 import org.example.domain.model.Person
 import java.util.UUID
 
-interface PersonRepositoryPort {
+interface PersonRepository {
     fun save(person: Person): Person
     fun findById(id: UUID): Person?
-    fun findAll(): List<Person>
+    fun update(person: Person): Person
     fun deleteById(id: UUID)
+    fun findAll(): List<Person>
 }

@@ -30,6 +30,9 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-ui:$springDocVersion")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation("org.mockito:mockito-core")
+    testImplementation("org.mockito:mockito-inline:4.8.0")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
@@ -72,8 +75,4 @@ springBoot {
 
 tasks.named<org.springframework.boot.gradle.tasks.run.BootRun>("bootRun") {
     mainClass.set("org.example.ApplicationKt")
-}
-
-tasks.named("build") {
-    dependsOn("flywayMigrate")
 }

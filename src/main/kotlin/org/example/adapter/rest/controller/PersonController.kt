@@ -1,8 +1,10 @@
-package org.example.adapter.rest
+package org.example.adapter.rest.controller
 
-import org.example.adapter.repository.entity.PersonEntity
+import jakarta.validation.Valid
+import org.example.adapter.rest.dto.PersonRequestDTO
+import org.example.adapter.rest.dto.PersonResponseDTO
 import org.example.domain.model.Person
-import org.example.domain.service.PersonService
+import org.example.domain.ports.input.PersonInputPort
 import org.example.exception.EntityNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -17,17 +19,18 @@ import java.util.UUID
 
 @RestController
 @RequestMapping("/persons")
-class PersonController(private val personService: PersonService) {
+class PersonController(private val personInputPort: PersonInputPort) {
 
     @PostMapping
-    fun savePerson(@RequestBody personEntity: PersonEntity): ResponseEntity<Person> {
-        val savedPerson = personService.save(personEntity.toDomain())
-        return ResponseEntity(savedPerson, HttpStatus.CREATED)
+    fun savePerson(@RequestBody @Valid personRequestDTO: PersonRequestDTO): ResponseEntity<PersonResponseDTO> {
+        val person = personRequestDTO.toDomain()
+        val savedPerson = personInputPort.savePerson(person)
+        return ResponseEntity(PersonResponseDTO.fromDomain(savedPerson), HttpStatus.CREATED)
     }
 
     @GetMapping
     fun getAllPersons(): ResponseEntity<List<Person>> {
-        val persons = personService.findAll()
+        val persons = personInputPort.getAllPersons()
         if (persons.isEmpty()) {
             throw EntityNotFoundException("No persons found")
         }
@@ -36,13 +39,13 @@ class PersonController(private val personService: PersonService) {
 
     @GetMapping("/{id}")
     fun getPersonById(@PathVariable id: UUID): ResponseEntity<Person> {
-        val person = personService.findById(id)
+        val person = personInputPort.getPersonById(id)
         return ResponseEntity(person, HttpStatus.OK)
     }
 
     @DeleteMapping
     fun deletePersonById(@PathVariable id: UUID): ResponseEntity<Unit> {
-        personService.deleteById(id)
+        personInputPort.deletePerson(id)
         return ResponseEntity(HttpStatus.NO_CONTENT)
     }
 }
