@@ -1,15 +1,15 @@
 package org.example.adapter.rest.dto
 
 import jakarta.validation.constraints.NotBlank
-import jakarta.validation.constraints.Positive
+import jakarta.validation.constraints.NotNull
 import org.example.domain.model.Person
 import java.util.UUID
 
 data class PersonRequestDTO(
-    @NotBlank(message = "Name is required")
+    @NotBlank
     val name: String,
 
-    @Positive(message = "Age must be positve")
+    @NotNull
     val age: Int
 ) {
     fun toDomain() = Person(name = name, age = age)

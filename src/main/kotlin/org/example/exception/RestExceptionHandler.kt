@@ -37,4 +37,9 @@ class RestExceptionHandler {
         val errors = ex.bindingResult.fieldErrors.associate { it.field to it.defaultMessage }
         return ResponseEntity(errors, HttpStatus.BAD_REQUEST)
     }
+
+    @ExceptionHandler(IllegalArgumentException::class)
+    fun handleIllegalArgumentException(exception: IllegalArgumentException): ResponseEntity<String> {
+        return ResponseEntity(exception.message, HttpStatus.BAD_REQUEST)
+    }
 }
